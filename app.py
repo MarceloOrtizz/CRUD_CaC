@@ -1,6 +1,6 @@
 #--------------------------------------------------------------------
 # Instalar con pip install Flask
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 #from flask import request
 
 # Instalar con pip install flask-cors
@@ -162,6 +162,44 @@ def mostrar_producto(codigo):
         return jsonify(producto), 201
     else:
         return "Producto no encontrado", 404
+    
+#--------------------------------------------------------------------
+# Agregar un producto
+#--------------------------------------------------------------------
+@app.route("/productos", methods=["POST"])
+#La ruta Flask `/productos` con el método HTTP POST está diseñada para permitir la adición de un nuevo producto a la base de datos.
+#La función agregar_producto se asocia con esta URL y es llamada cuando se hace una solicitud POST a /productos.
+def agregar_producto():
+    #Recojo los datos del form
+    codigo = request.form['codigo']
+    descripcion = request.form['descripcion']
+    cantidad = request.form['cantidad']
+    precio = request.form['precio']
+    imagen = request.files['imagen']
+    proveedor = request.form['proveedor']  
+    nombre_imagen=""
+
+    # Me aseguro que el producto exista
+    producto = catalogo.consultar_producto(codigo)
+    if not producto: # Si no existe el producto...
+        # Genero el nombre de la imagen
+        nombre_imagen = secure_filename(imagen.filename) #Chequea el nombre del archivo de la imagen, asegurándose de que sea seguro para guardar en el sistema de archivos
+        nombre_base, extension = os.path.splitext(nombre_imagen) #Separa el nombre del archivo de su extensión.
+        nombre_imagen = f"{nombre_base}_{int(time.time())}{extension}" #Genera un nuevo nombre para la imagen usando un timestamp, para evitar sobreescrituras y conflictos de nombres.
+        
+        #Se agrega el producto a la base de datos
+        if  catalogo.agregar_producto(codigo, descripcion, cantidad, precio, nombre_imagen, proveedor):
+            imagen.save(os.path.join(RUTA_DESTINO, nombre_imagen))
+
+            #Si el producto se agrega con éxito, se devuelve una respuesta JSON con un mensaje de éxito y un código de estado HTTP 201 (Creado).
+            return jsonify({"mensaje": "Producto agregado correctamente.", "imagen": nombre_imagen}), 201
+        else:
+            #Si el producto no se puede agregar, se devuelve una respuesta JSON con un mensaje de error y un código de estado HTTP 500 (Internal Server Error).
+            return jsonify({"mensaje": "Error al agregar el producto."}), 500
+
+    else:
+        #Si el producto ya existe (basado en el código), se devuelve una respuesta JSON con un mensaje de error y un código de estado HTTP 400 (Solicitud Incorrecta).
+        return jsonify({"mensaje": "Producto ya existe."}), 400
 
 
 
