@@ -150,6 +150,20 @@ def listar_productos():
     return jsonify(productos)
 
 
+#--------------------------------------------------------------------
+# Mostrar un sólo producto según su código
+#--------------------------------------------------------------------
+#La ruta Flask /productos/<int:codigo> con el método HTTP GET está diseñada para proporcionar los detalles de un producto específico basado en su código.
+#El método busca en la base de datos el producto con el código especificado y devuelve un JSON con los detalles del producto si lo encuentra, o None si no lo encuentra.
+@app.route("/productos/<int:codigo>", methods=["GET"])
+def mostrar_producto(codigo):
+    producto = catalogo.consultar_producto(codigo)
+    if producto:
+        return jsonify(producto), 201
+    else:
+        return "Producto no encontrado", 404
+
+
 
 if __name__ == '__main__':
     app.run()
