@@ -200,6 +200,20 @@ def agregar_producto():
     else:
         #Si el producto ya existe (basado en el código), se devuelve una respuesta JSON con un mensaje de error y un código de estado HTTP 400 (Solicitud Incorrecta).
         return jsonify({"mensaje": "Producto ya existe."}), 400
+    
+#--------------------------------------------------------------------
+# Modificar un producto según su código
+#--------------------------------------------------------------------
+@app.route("/productos/<int:codigo>", methods=["PUT"])
+#La ruta Flask /productos/<int:codigo> con el método HTTP PUT está diseñada para actualizar la información de un producto existente en la base de datos, identificado por su código.
+#La función modificar_producto se asocia con esta URL y es invocada cuando se realiza una solicitud PUT a /productos/ seguido de un número (el código del producto).
+def modificar_producto(codigo):
+    #Se recuperan los nuevos datos del formulario
+    nueva_descripcion = request.form.get("descripcion")
+    nueva_cantidad = request.form.get("cantidad")
+    nuevo_precio = request.form.get("precio")
+    nuevo_proveedor = request.form.get("proveedor")
+    imagen = request.files['imagen']
 
 
 
