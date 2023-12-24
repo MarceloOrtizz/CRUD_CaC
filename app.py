@@ -1,6 +1,6 @@
 #--------------------------------------------------------------------
 # Instalar con pip install Flask
-from flask import Flask
+from flask import Flask, jsonify
 #from flask import request
 
 # Instalar con pip install flask-cors
@@ -139,11 +139,17 @@ RUTA_DESTINO = './static/imagenes/'
 #Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
 #RUTA_DESTINO = '/home/USUARIO/mysite/static/imagenes'
 
+#--------------------------------------------------------------------
+# Listar todos los productos
+#--------------------------------------------------------------------
+#La ruta Flask /productos con el método HTTP GET está diseñada para proporcionar los detalles de todos los productos almacenados en la base de datos.
+#El método devuelve una lista con todos los productos en formato JSON.
+@app.route("/productos", methods=["GET"])
+def listar_productos():
+    productos = catalogo.listar_productos()
+    return jsonify(productos)
 
 
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
 
 if __name__ == '__main__':
     app.run()
