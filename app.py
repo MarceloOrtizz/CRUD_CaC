@@ -119,6 +119,28 @@ class Catalogo:
         else:
             print("Producto no encontrado.")
 
+
+
+#--------------------------------------------------------------------
+# Cuerpo del programa
+#--------------------------------------------------------------------
+# Crear una instancia de la clase Catalogo
+catalogo = Catalogo(host='localhost', user='root', password='root', database='miapp')
+#catalogo = Catalogo(host='USUARIO.mysql.pythonanywhere-services.com', user='USUARIO', password='CLAVE', database='USUARIO$miapp')
+
+# catalogo.agregar_producto(1, "Televisor 25",11, 340000, "tele.jpg",1)
+# catalogo.agregar_producto(2, "Notebook",11, 740000, "compu.jpg",1)
+# catalogo.agregar_producto(3, "Mouse tres botones",11, 3400, "mouse.jpg",1)
+
+
+# Carpeta para guardar las imagenes.
+RUTA_DESTINO = './static/imagenes/'
+
+#Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
+#RUTA_DESTINO = '/home/USUARIO/mysite/static/imagenes'
+
+
+
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
