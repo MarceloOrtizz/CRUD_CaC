@@ -215,6 +215,12 @@ def modificar_producto(codigo):
     nuevo_proveedor = request.form.get("proveedor")
     imagen = request.files['imagen']
 
+    # Procesamiento de la imagen
+    nombre_imagen = secure_filename(imagen.filename) #Chequea el nombre del archivo de la imagen, asegurándose de que sea seguro para guardar en el sistema de archivos
+    nombre_base, extension = os.path.splitext(nombre_imagen) #Separa el nombre del archivo de su extensión.
+    nombre_imagen = f"{nombre_base}_{int(time.time())}{extension}" #Genera un nuevo nombre para la imagen usando un timestamp, para evitar sobreescrituras y conflictos de nombres.
+
+
 
 
 if __name__ == '__main__':
