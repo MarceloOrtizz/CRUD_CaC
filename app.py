@@ -220,6 +220,16 @@ def modificar_producto(codigo):
     nombre_base, extension = os.path.splitext(nombre_imagen) #Separa el nombre del archivo de su extensión.
     nombre_imagen = f"{nombre_base}_{int(time.time())}{extension}" #Genera un nuevo nombre para la imagen usando un timestamp, para evitar sobreescrituras y conflictos de nombres.
 
+    # Busco el producto guardado
+    producto = producto = catalogo.consultar_producto(codigo)
+    if producto: # Si existe el producto...
+        imagen_vieja = producto["imagen_url"]
+        # Armo la ruta a la imagen
+        ruta_imagen = os.path.join(RUTA_DESTINO, imagen_vieja)
+
+        # Y si existe la borro.
+        if os.path.exists(ruta_imagen):
+            os.remove(ruta_imagen)
 
 
 
