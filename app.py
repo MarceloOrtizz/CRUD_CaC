@@ -255,6 +255,10 @@ def eliminar_producto(codigo):
         imagen_vieja = producto["imagen_url"]
         # Armo la ruta a la imagen
         ruta_imagen = os.path.join(RUTA_DESTINO, imagen_vieja)
+        
+        # Y si existe, la elimina del sistema de archivos.
+        if os.path.exists(ruta_imagen):
+            os.remove(ruta_imagen)
 
 
 if __name__ == '__main__':
