@@ -248,6 +248,13 @@ def modificar_producto(codigo):
 @app.route("/productos/<int:codigo>", methods=["DELETE"])
 #La ruta Flask /productos/<int:codigo> con el método HTTP DELETE está diseñada para eliminar un producto específico de la base de datos, utilizando su código como identificador.
 #La función eliminar_producto se asocia con esta URL y es llamada cuando se realiza una solicitud DELETE a /productos/ seguido de un número (el código del producto).
+def eliminar_producto(codigo):
+    # Busco el producto en la base de datos
+    producto = catalogo.consultar_producto(codigo)
+    if producto: # Si el producto existe, verifica si hay una imagen asociada en el servidor.
+        imagen_vieja = producto["imagen_url"]
+        # Armo la ruta a la imagen
+        ruta_imagen = os.path.join(RUTA_DESTINO, imagen_vieja)
 
 
 if __name__ == '__main__':
