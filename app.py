@@ -230,6 +230,16 @@ def modificar_producto(codigo):
         # Y si existe la borro.
         if os.path.exists(ruta_imagen):
             os.remove(ruta_imagen)
+    # Se llama al método modificar_producto pasando el codigo del producto y los nuevos datos.
+    if catalogo.modificar_producto(codigo, nueva_descripcion, nueva_cantidad, nuevo_precio, nombre_imagen, nuevo_proveedor):
+        #La imagen se guarda en el servidor.
+        imagen.save(os.path.join(RUTA_DESTINO, nombre_imagen))
+
+        #Si la actualización es exitosa, se devuelve una respuesta JSON con un mensaje de éxito y un código de estado HTTP 200 (OK).
+        return jsonify({"mensaje": "Producto modificado"}), 200
+    else:
+        #Si el producto no se encuentra (por ejemplo, si no hay ningún producto con el código dado), se devuelve un mensaje de error con un código de estado HTTP 404 (No Encontrado).
+        return jsonify({"mensaje": "Producto no encontrado"}), 403
 
 
 
