@@ -162,6 +162,7 @@ def mostrar_producto(codigo):
         return jsonify(producto), 201
     else:
         return "Producto no encontrado", 404
+ 
     
 #--------------------------------------------------------------------
 # Agregar un producto
@@ -201,6 +202,7 @@ def agregar_producto():
         #Si el producto ya existe (basado en el código), se devuelve una respuesta JSON con un mensaje de error y un código de estado HTTP 400 (Solicitud Incorrecta).
         return jsonify({"mensaje": "Producto ya existe."}), 400
     
+
 #--------------------------------------------------------------------
 # Modificar un producto según su código
 #--------------------------------------------------------------------
@@ -242,6 +244,7 @@ def modificar_producto(codigo):
         return jsonify({"mensaje": "Producto no encontrado"}), 403
 
 
+
 #--------------------------------------------------------------------
 # Eliminar un producto según su código
 #--------------------------------------------------------------------
@@ -255,11 +258,21 @@ def eliminar_producto(codigo):
         imagen_vieja = producto["imagen_url"]
         # Armo la ruta a la imagen
         ruta_imagen = os.path.join(RUTA_DESTINO, imagen_vieja)
-        
+
         # Y si existe, la elimina del sistema de archivos.
         if os.path.exists(ruta_imagen):
             os.remove(ruta_imagen)
+        # Luego, elimina el producto del catálogo
+        if catalogo.eliminar_producto(codigo):
+            #Si el producto se elimina correctamente, se devuelve una respuesta JSON con un mensaje de éxito y un código de estado HTTP 200 (OK).
+            return jsonify({"mensaje": "Producto eliminado"}), 200
+        else:
+            #Si ocurre un error durante la eliminación (por ejemplo, si el producto no se puede eliminar de la base de datos por alguna razón), se devuelve un mensaje de error con un código de estado HTTP 500 (Error Interno del Servidor).
+            return jsonify({"mensaje": "Error al eliminar el producto"}), 500
+    else:
+        #Si el producto no se encuentra (por ejemplo, si no existe un producto con el codigo proporcionado), se devuelve un mensaje de error con un código de estado HTTP 404 (No Encontrado). 
+        return jsonify({"mensaje": "Producto no encontrado"}), 404
 
-
+#--------------------------------------------------------------------
 if __name__ == '__main__':
     app.run()
