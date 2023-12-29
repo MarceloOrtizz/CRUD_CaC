@@ -242,6 +242,13 @@ def modificar_producto(codigo):
         return jsonify({"mensaje": "Producto no encontrado"}), 403
 
 
+#--------------------------------------------------------------------
+# Eliminar un producto según su código
+#--------------------------------------------------------------------
+@app.route("/productos/<int:codigo>", methods=["DELETE"])
+#La ruta Flask /productos/<int:codigo> con el método HTTP DELETE está diseñada para eliminar un producto específico de la base de datos, utilizando su código como identificador.
+#La función eliminar_producto se asocia con esta URL y es llamada cuando se realiza una solicitud DELETE a /productos/ seguido de un número (el código del producto).
+
 
 if __name__ == '__main__':
     app.run()
