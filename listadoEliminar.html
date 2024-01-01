@@ -99,7 +99,15 @@
                 }
             },
 
+            //Una vez iniciada la app de Vue, se carga el método mounted()
+            mounted() {
+                //Se llama al método obtenerProductos para cargar la lista de productos cuando la página se carga por primera vez.
+                this.obtenerProductos();
+            }
+        });
 
+        //Monta la aplicación Vue en el elemento <body> del DOM. Esto activa Vue en la página, haciendo que sea reactivo y maneje el contenido dinámicamente según los datos y las interacciones del usuario.
+        app.mount('body');
     </script>
 </body>
 </html>
