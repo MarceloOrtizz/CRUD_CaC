@@ -78,6 +78,20 @@
                         });
                 },
 
+                //Se utiliza para eliminar un producto.
+                eliminarProducto(codigo) {
+                    //Se muestra un diálogo de confirmación. Si el usuario confirma, se realiza una solicitud DELETE al servidor a través de fetch(URL + 'productos/${codigo}', {method: 'DELETE' }).
+                    if (confirm('¿Estás seguro de que quieres eliminar este producto?')) {
+                        fetch(URL + `productos/${codigo}`, { method: 'DELETE' })
+                            .then(response => {
+                                if (response.ok) {
+                                    // Si es exitosa (response.ok), elimina el producto y da mensaje de ok.
+                                    this.productos = this.productos.filter(producto => producto.codigo !== codigo);
+                                    alert('Producto eliminado correctamente.');
+                                }
+                            })
+
+
     </script>
 </body>
 </html>
