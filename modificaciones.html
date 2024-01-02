@@ -21,7 +21,8 @@
             <input type="text" v-model="codigo" required><br>
             <button type="submit">Modificar Producto</button> <a href="index.html">Menu principal</a>
         </form>
-            <!-- Segundo formulario: se muestra solo si mostrarDatosProducto es verdadero. Llama a la función guardarCambios -->
+
+        <!-- Segundo formulario: se muestra solo si mostrarDatosProducto es verdadero. Llama a la función guardarCambios -->
         <div v-if="mostrarDatosProducto">
             <h2>Datos del Producto</h2>
             <form @submit.prevent="guardarCambios">
@@ -60,6 +61,15 @@
             </form>
         </div>
     </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const URL = "http://127.0.0.1:5000/"
+
+        //Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
+        //const URL = "https://USUARIO.pythonanywhere.com/"
+
+    </script>
 
 </body>
 </html>
