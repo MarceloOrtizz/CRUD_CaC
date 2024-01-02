@@ -69,6 +69,25 @@
         //Al subir al servidor, deberá utilizarse la siguiente ruta. USUARIO debe ser reemplazado por el nombre de usuario de Pythonanywhere
         //const URL = "https://USUARIO.pythonanywhere.com/"
 
+
+        //Vue.createApp para crear nuestra aplicación Vue.
+        const app = Vue.createApp({
+            
+            //La función data devuelve un objeto que contiene las siguientes propiedades: 
+            data() {
+                return {
+                    codigo: '',
+                    descripcion: '',
+                    cantidad: '',
+                    precio: '',
+                    proveedor: '',
+                    imagen_url: '',
+                    imagenSeleccionada: null,
+                    imagenUrlTemp: null,
+                    mostrarDatosProducto: false, //mostrarDatosProducto para controlar la visibilidad del formulario de modificación.
+                };
+            },
+
     </script>
 
 </body>
