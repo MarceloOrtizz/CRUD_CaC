@@ -121,6 +121,12 @@
                         })
                 },
 
+                //Se activa cuando el usuario selecciona una imagen para cargar.
+                seleccionarImagen(event) {
+                    const file = event.target.files[0];
+                    this.imagenSeleccionada = file;
+                    this.imagenUrlTemp = URL.createObjectURL(file); // Crea una URL temporal para la vista previa
+                },
 
 
     </script>
