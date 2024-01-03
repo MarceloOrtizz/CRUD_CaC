@@ -88,6 +88,24 @@
                 };
             },
 
+            methods: {
+                //Se ejecuta cuando se envía el formulario de consulta. En este método, utilizamos fetch para realizar una solicitud GET a la API y obtener los datos del producto correspondiente al código ingresado.
+                obtenerProducto() {
+                    fetch(URL + 'productos/' + this.codigo)
+                    //Realiza una solicitud de red al servidor para obtener los datos del producto. Usa la URL definida anteriormente y añade 'productos/' seguido del código del producto.
+                        
+                        //Verificamos si la respuesta de la solicitud es exitosa (código de respuesta 200-299). 
+                        .then(response =>  {
+                            //Si es así, utilizamos response.json() para parsear la respuesta en formato JSON.
+                            if (response.ok) {
+                                return response.json() //Una vez que la respuesta llega del servidor, se convierte de formato JSON a un objeto JavaScript.
+                            } else {
+                                //Si la respuesta es un error, lanzamos una excepción para ser "catcheada" más adelante en el catch.
+                                throw new Error('Error al obtener los datos del producto.')
+                            }
+                        })
+
+
     </script>
 
 </body>
