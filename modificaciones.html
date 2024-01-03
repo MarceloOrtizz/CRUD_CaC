@@ -105,6 +105,23 @@
                             }
                         })
 
+                        //En este bloque, se asignan los datos obtenidos a las variables correspondientes de la aplicación Vue.
+                        .then(data => {
+                            this.descripcion = data.descripcion;
+                            this.cantidad = data.cantidad;
+                            this.precio = data.precio;
+                            this.proveedor = data.proveedor;
+                            this.imagen_url =  data.imagen_url;
+                            this.mostrarDatosProducto = true;
+                        })
+
+                        //Si ocurre un error durante la solicitud, se captura y se imprime en la consola.
+                        .catch(error => {
+                            alert('Código no encontrado.')
+                        })
+                },
+
+
 
     </script>
 
