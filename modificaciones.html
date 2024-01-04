@@ -141,6 +141,34 @@
                         formData.append('imagen', this.imagenSeleccionada, this.imagenSeleccionada.name);
                     }
 
+                    //Utilizamos fetch para realizar una solicitud PUT a la API y guardar los cambios.
+                    fetch(URL + 'productos/' + this.codigo, {
+                        method: 'PUT',
+                        body: formData, //Dado que formData puede contener archivos, no se utiliza JSON.
+                    })
+                        .then(response => {
+                            //Si la respuesta es exitosa, utilizamos response.json() para parsear la respuesta en formato JSON.
+                            if (response.ok) {
+                                return response.json()
+                            } else {
+                                //Si la respuesta es un error, lanzamos una excepción.
+                                throw new Error('Error al guardar los cambios del producto.')
+                            }
+                        })
+
+                        //Respuesta OK, muestra una alerta informando que el producto se agregó correctamente y limpia los campos del formulario para que puedan ser utilizados para un nuevo producto.
+                        .then(data => {
+                            alert('Producto actualizado correctamente.');
+                            this.limpiarFormulario();
+                        })
+
+                        // En caso de error, mostramos una alerta con un mensaje de error.
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Error al actualizar el producto.');
+                        });
+                },
+
 
     </script>
 
