@@ -127,6 +127,7 @@
                     this.imagenSeleccionada = file;
                     this.imagenUrlTemp = URL.createObjectURL(file); // Crea una URL temporal para la vista previa
                 },
+                
                 //Se usa para enviar los datos modificados del producto al servidor.
                 guardarCambios() {
                     const formData = new FormData();
@@ -169,7 +170,21 @@
                         });
                 },
 
+                //Restablece todas las variables relacionadas con el formulario a sus valores iniciales, lo que efectivamente "limpia" el formulario.
+                limpiarFormulario() {
+                    this.codigo = '';
+                    this.descripcion = '';
+                    this.cantidad = '';
+                    this.precio = '';
+                    this.imagen_url = '';
+                    this.imagenSeleccionada = null;
+                    this.imagenUrlTemp = null;
+                    this.mostrarDatosProducto = false;
+                }
+            }
+        });
 
+        
     </script>
 
 </body>
