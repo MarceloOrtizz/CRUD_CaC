@@ -127,6 +127,19 @@
                     this.imagenSeleccionada = file;
                     this.imagenUrlTemp = URL.createObjectURL(file); // Crea una URL temporal para la vista previa
                 },
+                //Se usa para enviar los datos modificados del producto al servidor.
+                guardarCambios() {
+                    const formData = new FormData();
+                    formData.append('codigo', this.codigo);
+                    formData.append('descripcion', this.descripcion);
+                    formData.append('cantidad', this.cantidad);
+                    formData.append('proveedor', this.proveedor);
+                    formData.append('precio', this.precio);
+
+                    //Si se ha seleccionado una imagen nueva, la añade al formData. 
+                    if (this.imagenSeleccionada) {
+                        formData.append('imagen', this.imagenSeleccionada, this.imagenSeleccionada.name);
+                    }
 
 
     </script>
