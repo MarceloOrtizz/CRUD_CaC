@@ -57,7 +57,11 @@
             formData.append('imagen', document.getElementById('imagenProducto').files[0]);
             formData.append('proveedor', document.getElementById('proveedorProducto').value);
 
-
+            // Realizamos la solicitud POST al servidor. El método POST se usa para enviar y crear nuevos datos en el servidor.
+            fetch(URL + 'productos', {
+                method: 'POST',
+                body: formData // Aquí enviamos formData. Dado que formData puede contener archivos, no se utiliza JSON.
+            })
         
     </script>
 </body>
