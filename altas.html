@@ -62,6 +62,18 @@
                 method: 'POST',
                 body: formData // Aquí enviamos formData. Dado que formData puede contener archivos, no se utiliza JSON.
             })
+
+                //Después de realizar la solicitud POST, se utiliza el método then() para manejar la respuesta del servidor.
+                .then(function (response) {
+                    if (response.ok) { 
+                        //Si la respuesta es exitosa, convierte los datos de la respuesta a formato JSON.
+                        return response.json(); 
+                    } else {
+                        // Si hubo un error, lanzar explícitamente una excepción
+                        // para ser "catcheada" más adelante
+                        throw new Error('Error al agregar el producto.');
+                    }
+                })
         
     </script>
 </body>
