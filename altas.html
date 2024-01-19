@@ -84,6 +84,17 @@
                 .catch(function (error) {
                     alert('Error al agregar el producto.');
                 })
+
+                // Limpiar el formulario en ambos casos (éxito o error)
+                .finally(function () {
+                    document.getElementById('codigo').value = "";
+                    document.getElementById('descripcion').value = "";
+                    document.getElementById('cantidad').value = "";
+                    document.getElementById('precio').value = "";
+                    document.getElementById('imagenProducto').value = "";
+                    document.getElementById('proveedorProducto').value = "";
+                });
+        })
     </script>
 </body>
 
